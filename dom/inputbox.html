@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>ダイアログボックス</title>
+        <style>
+            #dialog {
+                width: 250px;
+                padding: 30px 20px;
+                text-align: center;
+                border: 1px solid #aaa;
+                box-shadow:2px 2px 4px #888;
+            }
+        </style>
+    </head>
+    <body>
+        <form id="dialog" name="dialog">
+            <input type="button" name="yes" value="はい">
+            <input type="button" name="no" value="いいえ">
+            <input type="button" name="cancel" value="キャンセル">
+        </form>
+        <p id="info"></p>
+        <script>
+            const form = document.forms.dialog;
+            const info = document.getElementById('info');
+            
+            form.yes.addEventListener('click', () => {
+                info.textContent = '「はい」がクリックされました';
+            });
+            
+            form.no.addEventListener('click', () => {
+                info.textContent = '「いいえ」がクリックされました';
+            });
+            
+            form.cancel.addEventListener('click', () => {
+                info.textContent = '「キャンセル」がクリックされました';
+            });
+        </script>
+    </body>
+</html>

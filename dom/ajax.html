@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Ajax</title>
+    </head>
+    <body>
+        <h1>Javascript関連の最新記事 by Qiita</h1>
+        
+        <button id="btn">更新</button>
+        <ul id="list"></ul>
+        
+        <script>
+            const url = 'https://qiita.com/api/v2/tags/javascript/items';
+            const btn = document.getElementById('btn');
+            const list = document.getElementById('list');
+            
+            const createList = item => {
+                const li =document.createElement('li');
+                const a = document.createElement('a');
+                
+                a.href = item.url;
+                li.textContent = item.title;
+                
+                a.appendChild(li);
+                list.appendChild(a);
+                
+            }
+            
+            btn.addEventListener('click', () => {
+                list.innerHTML = '';
+                
+                fetch(url)
+                .then(data => data.json())
+                .then(data => {
+                    
+                    data.forEach(item => createList(item))
+                })
+            })
+        </script>
+    </body>
+</html>

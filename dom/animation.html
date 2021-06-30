@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>文字のアニメーション</title>
+    </head>
+    <body>
+        <h1 id="text">こんにちは</h1>
+        
+        <script>
+            const h1 = document.getElementById("text");
+            
+            runAnimation(h1, "marginLeft", 100, "px");
+            runAnimation(h1, "fontSize", 100, "px");
+            runAnimationAfter(h1, "opacity", 1, "");
+            
+            //引数にHTML要素・CSSプロパティ・値・単位
+            function runAnimation(element, animationType, value, unit) {
+                let count = 0;
+                
+                const timer = setInterval(() => {
+                    element.style[animationType] = count + unit;
+                    count = count + value / 300;
+                    
+                    if(count >= value) clearInterval(timer);
+                }, 10);
+            }
+            //setTimeout()は指定した時間が経過したら実行される
+            //三秒後にアニメーション実行
+            function runAnimationAfter(element, animationType, value, unit) {
+                const timer = setTimeout(() => {
+                    
+                    runAnimation(element, animationType, value, unit);
+                }, 3000);
+            }
+        </script>
+    </body>
+</html>

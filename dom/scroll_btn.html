@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>画面スクロール</title>
+        <style>
+            .screenBlue {
+                height: 100vh;
+                color: #fff;
+                font-size: 5em;
+                text-align: center;
+                background-color: #88f;
+            }
+            
+            .screenRed {
+                height: 100vh;
+                color: #fff;
+                font-size: 5em;
+                text-align: center;
+                background-color: #f88;
+            }
+            
+            .pagetop {
+                display: none;
+                
+                padding: 40px 10px;
+                background-color: #fff;
+                color: #000;
+                text-decoration: none;
+                border-radius: 50%;
+                
+                position: fixed;
+                bottom: 10px;
+                right: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="screenBlue">ここがトップページです</div>
+        <div class="screenRed">２ページ目</div>
+        <div class="screenBlue">３ページ目</div>
+        <div class="screenRed">４ページ目</div>
+        <div class="screenBlue">５ページ目</div>
+        
+        <a class="pagetop" id="top" >TOPに戻る</a>
+        <script>
+            const topLink = document.getElementById("top");
+            let scrollValue;
+            
+            window.addEventListener('scroll', () => {
+                scrollValue = document.scrollingElement.scrollTop;
+                //スクロール量が300を超えたらボタンを表示
+                if(scrollValue >= 300) {
+                    
+                    topLink.style.display = "inline";
+                //300以下の場合非表示
+                } else if(scrollValue < 300) {
+                    
+                    topLink.style.display = "none";
+                }
+            });
+            //画面トップに戻る際にアニメーションさせる
+            topLink.addEventListener('click', () => {
+                const timer = setInterval(() => {
+                    //トップに戻ったrタイマーをリセット
+                    if(scrollValue < 0) clearInterval(timer);
+                    
+                    document.scrollingElement.scrollTop = scrollValue;
+                    
+                scrollValue = scrollValue - 10;
+                });
+            });
+        </script>
+    </body>
+</html>
